@@ -56,7 +56,12 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
     
     
     private var bluetoothCenter : CBCentralManager! //蓝牙
-    
+    private var nowPeripheral:CBPeripheral!//当前外设
+    private var serverPeripheral:CBPeripheral!//service外设
+    private var peripheralList:NSMutableArray!//设备组
+    private var cPeripheral:CBPeripheral!//characteristic外设
+    private var writeCharacteristic:CBCharacteristic! //写特征值
+    private var readCharacteristic:CBCharacteristic! //读特征值
     
     
     class var share:CoreBluetoothExtension {
@@ -107,6 +112,98 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
         }
     }
     
+    //MARK: 蓝牙已经连接
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        peripheral.delegate = self
+        peripheral.discoverServices(nil)
+        nowPeripheral = peripheral
+        NotificationExtension.postNotification(name: BLECONNECTSTATUS , object: ["status": BLEConnectStatus.connected])
+    }
+    
+    //MARK: 蓝牙连接错误
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        NotificationExtension.postNotification(name: BLECONNECTSTATUS, object: ["status":BLEConnectStatus.connectError])
+    }
+    
+    //MARK: 发现服务回调
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        nowPeripheral = peripheral
+        let macData = advertisementData["kCBAdvDataManufacturerData"] as? Data
+        
+        if macData != nil {
+//            let macAddress = NSString.init().coverData(toHexStr: macData!)
+//
+//            if macAddress == BLEMACADDRESS {
+//
+//                central.connect(peripheral, options: nil)
+//                central.stopScan()
+//            }
+            
+        }
+        
+    }
+    
+    //MARK: 蓝牙取消与外设连接回调
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        NotificationExtension.postNotification(name: BLECONNECTSTATUS , object: ["status":BLEConnectStatus.disConnect])
+    }
+    
+    //MARK: 蓝牙与应用状态同步
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        
+    }
+    
+    
+    //MARK: 外设代理方法
+    
+    //MARK: 匹配一个服务的UUID
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        if (error != nil) {
+            LJQPrint("扫描外设出错 \(String(describing: peripheral.name)), \(error?.localizedDescription)")
+            return
+        }
+        
+        self.serverPeripheral = peripheral
+            LJQPrint("扫描到外设服务 \(peripheral.name), \(peripheral.services)")
+        for service:CBService in peripheral.services! {
+            self.nowPeripheral.discoverCharacteristics(nil, for: service)
+        }
+        
+        
+    }
+    
+    //MARK: 服务特征值
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if (error != nil) {
+            LJQPrint("扫描外设的特征值失败: \(peripheral.name), \(service.uuid.uuidString), \(service.characteristics)")
+            return
+        }
+        for characteristic:CBCharacteristic in service.characteristics! {
+            peripheral.setNotifyValue(true, for: characteristic)
+            if characteristic.uuid.uuidString == BLEWRITEID {
+                writeCharacteristic = characteristic
+            }
+            
+            if characteristic.uuid.uuidString == BLEREADID {
+                readCharacteristic = characteristic
+            }
+        }
+    }
+    
+    //MARK: 特征值改变会走这个回调
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if characteristic.uuid.uuidString == BLEREADID {
+
+            NotificationExtension.postNotification(name: BLESENDRESPONSE, object: ["msg":characteristic])
+
+        }
+        
+    }
+    
+    //MARK: 蓝牙写入消息
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+    }
     
     
 }

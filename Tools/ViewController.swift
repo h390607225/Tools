@@ -13,6 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AlamofireExtension.share.request(url: "http://www.baidu.com", methodType: .GET, header: true, isUploadPic:true, imgJSON:["file":UIImage.init()]) { (response, isSuccess) in
+            
+        }
+        
+        
+        
+        LJQPrint(UIFont.familyNames)
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     

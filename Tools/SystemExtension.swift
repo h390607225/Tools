@@ -93,18 +93,18 @@ extension UILabel {
         self.textColor = color
     }
     
-    
-    
     //MARK: 根据文字计算高度
     func stringLabelHeight() -> CGFloat {
         let size = self.text!.boundingRect(with: CGSize(width: self.frame.width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font!], context: nil).size
         return size.height
     }
+    
     //MARK: 根据文字计算宽度
     func stringLabelWidth() -> CGFloat {
         let size = self.text!.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: self.frame.height), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font!], context: nil).size
         return size.width
     }
+    
     //MARK: 文字左右对齐
     func changeLabelLeftAndRight() {
         let textSize = (self.text! as NSString).boundingRect(with: CGSize(width: self.frame.width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine, .usesFontLeading], attributes: [NSAttributedString.Key.font: font!], context: nil)
@@ -148,7 +148,6 @@ extension NSString  {
     func setAttribute(cStr:String, cFont:UIFont, cColor:UIColor) -> NSAttributedString {
         let attribute = NSMutableAttributedString.init(string: self as String)
         let ranges = self.getStrRanges(str: cStr)
-        
         let dic = NSMutableDictionary.init()
         dic[NSAttributedString.Key.font] = cFont
         dic[NSAttributedString.Key.foregroundColor] = cColor
@@ -180,6 +179,25 @@ extension NSString  {
         return rangeArr
     }
     
+    
+    
+    func hexStringFromString(string:String)->String{
+        let  myD = string.data(using: .utf8)
+        let bytes = [UInt8](myD!)
+        
+        var hexString = ""
+        for (index,_) in (myD?.enumerated())!{
+            let newHexString = String(bytes[index] & 0xFF)
+            print(newHexString)
+            if newHexString.count == 1{
+                hexString = hexString + "0" + newHexString
+            }else{
+                hexString = hexString + newHexString
+            }
+            
+        }
+        return hexString
+    }
     
     
     
@@ -505,6 +523,15 @@ extension NSDate {
     }
 }
 
+
+extension UINavigationController {
+    
+    
+    
+    
+    
+    
+}
 
 
 
