@@ -12,11 +12,6 @@ let backImg = ""//返回按钮图片
 
 
 
-
-
-
-
-
 class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -26,6 +21,7 @@ class BaseViewController: UIViewController {
     }
     
     
+    /// 设置返回按钮
     func setBackBarButton() {
         let backImg = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 50, height: 44))
         backImg.contentMode = .left
@@ -37,19 +33,36 @@ class BaseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backBarBtn
     }
     
+    
+    
+    
+    
+    /// 返回
     func backAction() {
         self.navigationController?.popViewController(animated: true)
     }
     
     
+    /// 跳转到VC
+    ///
+    /// - Parameters:
+    ///   - vc: 跳转到的VC
+    ///   - isHiddenTabbar: 是否隐藏tabbar
     func pushToVC(vc:UIViewController, isHiddenTabbar:Bool) {
         vc.hidesBottomBarWhenPushed = isHiddenTabbar
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
-    func pop() {
-        self.navigationController?.popViewController(animated: true)
+    
+    /// 模态dismiss
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    
     
     
     
