@@ -34,6 +34,13 @@ class BaseViewController: UIViewController {
     }
     
     
+    /// 设置带文字返回按钮
+    func setBackTitleButton() {
+        let backView = BackView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+        let backBarBtn = UIBarButtonItem.init(customView: backView)
+        self.navigationItem.leftBarButtonItem = backBarBtn
+    }
+    
     
     
     
@@ -61,25 +68,6 @@ class BaseViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     /*
     // MARK: - Navigation
@@ -91,4 +79,113 @@ class BaseViewController: UIViewController {
     }
     */
 
+}
+
+
+class BackView:UIView {
+    
+    
+    /// 返回图片
+    public var backImage:String! {
+        set {
+            backImg.image = UIImage.init(named: newValue)
+        }
+        get {
+            return ""
+        }
+    }
+    
+    /// 返回文字大小
+    public var backFont:UIFont! {
+        set {
+//            backTitleLabel.font = newValue
+//            updateFrame()
+        }
+        get {
+            return FONT_31
+        }
+    }
+    
+    /// 返回文字颜色
+    public var backColor:UIColor {
+        set {
+            backTitleLabel.textColor = newValue
+        }
+        get {
+            return .lightGray
+        }
+    }
+    
+    public var spaceImgWidth:CGFloat! {
+        set {
+//            updateFrame()
+        }
+        get {
+            return 10
+        }
+    }
+    
+    
+    private var titleWidth:CGFloat!
+    private var backImg:UIImageView!
+    private var backTitleLabel:UILabel!
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .yellow
+        setUpUI()
+    }
+    
+    
+    func setUpUI() {
+        
+        backImg = UIImageView.init()
+        self.addSubview(backImg)
+        backImg.contentMode = .center
+        backImg.backgroundColor = .lightGray
+        
+        backTitleLabel = UILabel.init()
+        self.addSubview(backTitleLabel)
+        backTitleLabel.font = backFont
+        backTitleLabel.textColor = backColor
+        backTitleLabel.text = "返回"
+        backTitleLabel.backgroundColor = .purple
+        
+        LJQPrint(backFont)
+        
+        titleWidth = backTitleLabel.stringLabelWidth()
+        
+//        updateFrame()
+        
+    }
+    
+    func updateFrame() {
+        weak var weakSelf = self
+        weakSelf?.frame = CGRect(x: 0, y: 0, width: titleWidth + spaceImgWidth + backImg.frame.width, height: 44)
+    }
+    
+    
+    
+    
+    //MARK: 重新布局
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        weak var weakSelf = self
+        
+        backImg.frame = CGRect(x: 0, y: 0, width: 20, height: weakSelf!.frame.height)
+        backTitleLabel.frame = CGRect(x: backImg.frame.width + spaceImgWidth, y: 0, width: backTitleLabel.stringLabelWidth(), height: weakSelf!.frame.height)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    
+    
+    
 }

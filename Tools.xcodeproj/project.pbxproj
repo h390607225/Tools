@@ -11,6 +11,7 @@
 		6A455C292317B76A00EEFB92 /* CoreBluetoothExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */; };
 		6A5D2F1023212D7A00F08258 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */; };
 		6A5EA9E32318CF91008200E2 /* AlamofireExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */; };
+		6A9BA92C232269CF0022CA38 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9BA92B232269CF0022CA38 /* HomePage.swift */; };
 		6AB782A2231614EF00EA27DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782A1231614EF00EA27DD /* AppDelegate.swift */; };
 		6AB782A4231614EF00EA27DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782A3231614EF00EA27DD /* ViewController.swift */; };
 		6AB782A7231614EF00EA27DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB782A5231614EF00EA27DD /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothExtension.swift; sourceTree = "<group>"; };
 		6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireExtension.swift; sourceTree = "<group>"; };
+		6A9BA92B232269CF0022CA38 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		6AB7829E231614EF00EA27DD /* Tools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB782A1231614EF00EA27DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AB782A3231614EF00EA27DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */,
 				6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */,
 				6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */,
+				6A9BA92B232269CF0022CA38 /* HomePage.swift */,
 				6AB782A5231614EF00EA27DD /* Main.storyboard */,
 				6AB782AB231614F000EA27DD /* Assets.xcassets */,
 				6AB782AD231614F000EA27DD /* LaunchScreen.storyboard */,
@@ -411,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB782D723161FDB00EA27DD /* SystemExtension.swift in Sources */,
+				6A9BA92C232269CF0022CA38 /* HomePage.swift in Sources */,
 				6AB782A4231614EF00EA27DD /* ViewController.swift in Sources */,
 				6A5D2F1023212D7A00F08258 /* BaseViewController.swift in Sources */,
 				6AB782AA231614EF00EA27DD /* Tools.xcdatamodeld in Sources */,
