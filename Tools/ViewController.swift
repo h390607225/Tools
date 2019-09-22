@@ -19,11 +19,7 @@ class ViewController: UIViewController {
         
         
         
-        let custom = CustomButtonView.init(fram: CGRect(x: 10, y: 100, width: 10, height: 10), selectImg: "", unSelectImg: "")
-        custom.imgSpace = .right
-        custom.leftSpace =  10
-        custom.textStr = "测试文档"
-        self.view.addSubview(custom)
+        
         
         
 //        LJQPrint(UIFont.familyNames)

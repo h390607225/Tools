@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let navi = UINavigationController.init(rootViewController: homePage)
 //        self.window?.rootViewController = navi
         
-        
+        AlamofireExtension.share.setAlamofireHttps()
         
         
         
