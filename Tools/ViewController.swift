@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+enum MyError : Error {
+    case one
+    case two
+    case three
+}
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -17,6 +21,14 @@ class ViewController: UIViewController {
 //
 //        }
         
+       
+        var str = try? testFunc(str: nil)
+        print(str)
+        
+        
+        AlamofireExtension.share.request(url: "123", methodType: .POST, parameters: nil, header: true, isUploadPic: false, imgJSON: nil) { (result, isSuccess) in
+            LJQPrint("123")
+        }
         
         
         
@@ -28,6 +40,23 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    
+    func testFunc(str: String? = nil) throws -> String  {
+        if str == "one" {
+            throw MyError.one
+        }else if str == "two" {
+            throw MyError.two
+        }else if str == "three" {
+            throw MyError.three
+        }else if str == nil {
+            throw MyError.three
+        }
+        return "ok"
+    }
+    
     
     @objc func setUpUI() {
         LJQPrint("通知")

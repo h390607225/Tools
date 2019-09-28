@@ -8,21 +8,21 @@
 
 import UIKit
 
-/// 屏幕宽度
+//MARK: 屏幕宽度
 public let WIDTH = UIScreen.main.bounds.width
-/// 屏幕高度
+//MARK: 屏幕高度
 public let HEIGHT = UIScreen.main.bounds.height
-/// 屏幕的Frame
+//MARK: 屏幕frame
 public let MAINFRAME = UIScreen.main.bounds
-/// 状态栏高度
+//MARK: 状态栏高度
 public let STATEHEIGHT = UIApplication.shared.statusBarFrame.height
-/// 状态栏+导航栏高度(为了适配iphone X)
+//MARK: 状态栏+导航栏高度(为了适配iphone X)
 public let NAVHEITH = (UIApplication.shared.statusBarFrame.height + 44)
-/// 获取根视图
+//MARK: 获取根视图
 public let KEYWINDOW = UIApplication.shared.keyWindow
 
-/// 文字大小
-//Microsoft YaHei
+//MARK: 甚至文字大小及字体类型
+//MARK: 微软雅黑
 public let FONT_10 = UIFont(name: "Microsoft YaHei", size: 10)
 public let FONT_11 = UIFont(name: "Microsoft YaHei", size: 11)
 public let FONT_12 = UIFont(name: "Microsoft YaHei", size: 12)

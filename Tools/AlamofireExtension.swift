@@ -6,16 +6,28 @@
 //  Copyright © 2019 LJQ. All rights reserved.
 //
 
+/*
+ 遗留问题:
+ 1.当入参为可选参数=nil时候,应该如何处理
+ 2.swift 对于try&try?&try!的时候方法,应该是如何使用
+ */
+
+
+
 import UIKit
 import Alamofire
 import SwiftyJSON
-
-public let timeoutRequest:TimeInterval = 20 //请求超时时间
-public let listenHost:String = "https://www.baidu.com" //监听的网络
-public let successCode:String = "" //请求成功码
+//MARK: 请求超时时间
+public let timeoutRequest:TimeInterval = 20
+//MARK: 监听的网络
+public let listenHost:String = "https://www.baidu.com"
+//MARK: 请求成功码
+public let successCode:String = ""
+//MARK: 请求域名
 private let baseURL:String = ""
 
 private let shareManager = AlamofireExtension()
+
 
 //MARK: 请求格式
 enum RequestType {
@@ -55,21 +67,21 @@ class AlamofireExtension: NSObject {
         return shareManager
     }
     
-    
-    
-    
     //MARK: 对外网络请求
-    func request(url:String, methodType: RequestType, parameters:[String: Any]? = nil, header: Bool , isUploadPic:Bool? = nil, imgJSON:[String: UIImage]? = nil, result:@escaping((JSON, Bool))->()) {
+    func request(url:String, methodType: RequestType, parameters:[String: Any]? = nil, header: Bool , isUploadPic:Bool? = nil, imgJSON:[String: UIImage]? = nil, result:@escaping((JSON, Bool)->())) {
         
-        AlamofireExtension.share.startListen_Networking { (netType) in
+        AlamofireExtension.share.startListen_Networking {[weak self] (netType) in
             switch netType {
             case .WIFI:
                 LJQPrint("wifi连接")
-                if isUploadPic! {
+                
+                if ((try? isUploadPic) != nil) {
                     LJQPrint("上传图片")
                     
                 }else {
-                    shareManager.requestURL(url: url, methodType: methodType, parameters: parameters, header: header, result: { (resposne, isSuccess) in
+                    let parame = try? self!.configParameters(parame: parameters)
+                    
+                    shareManager.requestURL(url: url, methodType: methodType, parameters: parame, header: header, result: { (resposne, isSuccess) in
                         LJQPrint(resposne)
                         LJQPrint(isSuccess)
                     })
@@ -87,16 +99,19 @@ class AlamofireExtension: NSObject {
     
     
     
-    
+    //MARK: 内部网络请求
     private func requestURL(url: String, methodType:RequestType, parameters:[String:Any]? = nil ,header:Bool? = nil, result:@escaping((JSON, Bool))->()) {
-        
         
         
         var httpHeader:HTTPHeaders?
         if header! {
-            httpHeader = ["requestId":""]
+            httpHeader = configHeader(headers: ["key":"value"])
+            
         }
-        shareSessionManager.request(url, method: configMethod(methodType: methodType), parameters: parameters, encoding: JSONEncoding.default, headers: httpHeader).responseJSON { (response) in
+        
+        let requestURL = getRequestURL(url: url)
+        
+        shareSessionManager.request(requestURL, method: configMethod(methodType: methodType), parameters: parameters, encoding: JSONEncoding.default, headers: httpHeader).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 
@@ -119,10 +134,36 @@ class AlamofireExtension: NSObject {
         }
     }
     
+    //MARK: 图片上传(单张)
+    private func uploadPic(url: String, pic:UIImage, parameters: [String: Any]? = nil) {
+        
+        
+        
+            
+        
+        
+        
+//        shareSessionManager.upload(multipartFormData: { (multipartFormData) in
+//            let fileName = String.init(describing: NSData()) + ".png"
+//            let imgData = pic.jpegData(compressionQuality: 1)
+//            multipartFormData.append(imgData!, withName: fileName, mimeType: "image/png")
+//
+//            for (key, value) in parameters! {
+//                multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
+//            }
+//            
+//        }, to: getRequestURL(url: url)) { (result) in
+//            switch result {
+//            case .success(request: UploadRequest, streamingFromDisk: <#T##Bool#>, streamFileURL: <#T##URL?#>)
+//            }
+//            LJQPrint(result)
+//        }
+    }
     
+    
+    
+    //MARK: 上传图片
 //    private func uploadPics(url: String, picArray: [UIImage]) {
-//
-//
 //
 //        shareSessionManager.upload(multipartFormData: { (multipartFormData) in
 //
@@ -132,13 +173,13 @@ class AlamofireExtension: NSObject {
 //                multipartFormData.append(imgData!, withName: "file", fileName: fileName, mimeType: "image/png")
 //            }
 //
-//            for (key, value) in self.configParameters(parame: [:]) {
+//            for (key, value) in self.configParameters(parame: [:])! {
 //                multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
 //            }
 //
 //
 //
-//        }, to: getRequestURL(url: url, headers: )) { (result) in
+//        }, to: getRequestURL(url: url, headers: true))) { (result) in
 //            switch result {
 //            case .success(let upload, _ , _):
 //                upload.responseJSON(completionHandler: { (response) in
@@ -168,7 +209,7 @@ class AlamofireExtension: NSObject {
     
     
     //MARK: 请求参数
-    private func configParameters(parame: [String: Any]) -> [String: Any] {
+    private func configParameters(parame: [String: Any]? = nil) throws -> [String: Any]? {
         let paramerts:[String: Any]!
         paramerts = parame
         return paramerts
@@ -176,7 +217,7 @@ class AlamofireExtension: NSObject {
     }
     
     
-    //MARK: 请求头
+    //MARK: 设置请求头
     private func configHeader(headers:[String: String]) -> HTTPHeaders {
         var httpHeader:HTTPHeaders?
         httpHeader = headers
@@ -213,21 +254,6 @@ class AlamofireExtension: NSObject {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: 监听网络通信状态
     func startListen_Networking(networkType:@escaping((NetworkingType))->()) {
         let networManager = NetworkReachabilityManager(host: listenHost)
@@ -255,7 +281,7 @@ class AlamofireExtension: NSObject {
     
     
     
-    
+    //MARK: https证书校验
     func setAlamofireHttps() {
         SessionManager.default.delegate.sessionDidReceiveChallenge = {(session: URLSession, challenge: URLAuthenticationChallenge)in
             let method = challenge.protectionSpace.authenticationMethod
@@ -291,29 +317,23 @@ class AlamofireExtension: NSObject {
         var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
         var credential: URLCredential?
         
+        
         //获取服务器发送过来的证书
-        let serverTrust:SecTrust = challenge.protectionSpace.serverTrust!
-        let certificate = SecTrustGetCertificateAtIndex(serverTrust, 0)!
-        let remoteCertificateData = CFBridgingRetain(SecCertificateCopyData(certificate))!
+        let serverTrust:SecTrust = challenge.protectionSpace.serverTrust!//证书链
+        //获取本地证书
+        let localCertificates = ServerTrustPolicy.certificates(in: Bundle.main)
         
-        //加载本地CA证书
-        let cerPath = Bundle.main.path(forResource: "你本地的cer证书文件名", ofType: "cer")!
-        let cerUrl = URL(fileURLWithPath:cerPath)
-        let localCertificateData = try! Data(contentsOf: cerUrl)
+        let securityPolicy = ServerTrustPolicy.pinCertificates(certificates: localCertificates, validateCertificateChain: true, validateHost: true)
         
-        if (remoteCertificateData.isEqual(localCertificateData) == true) {
-            
-            //服务器证书验证通过
+        if securityPolicy.evaluate(serverTrust, forHost: challenge.protectionSpace.host) {
+            LJQPrint("验证成功")
             disposition = URLSession.AuthChallengeDisposition.useCredential
             credential = URLCredential(trust: serverTrust)
-            
-        } else {
-            
-            //服务器证书验证失败
+        }else {
+            LJQPrint("验证失败")
             disposition = URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge
-            
         }
-        
+
         return (disposition, credential)
         
     }
@@ -351,8 +371,4 @@ class AlamofireExtension: NSObject {
         return (disposition, credential)
         
     }
-    
-    
-    
-    
 }
