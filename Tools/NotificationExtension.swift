@@ -34,10 +34,4 @@ class NotificationExtension: NSObject {
     class func addObserver(observer: Any , selector: Selector , name: String , object: Any?) {
         NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: name), object: object)
     }
-    
-    
-    
-    
-    
-    
 }

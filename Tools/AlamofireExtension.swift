@@ -8,11 +8,8 @@
 
 /*
  遗留问题:
- 1.当入参为可选参数=nil时候,应该如何处理
- 2.swift 对于try&try?&try!的时候方法,应该是如何使用
- 3.Alamofire图片上传
+ https证书校验的sessionManager与网络请求不是一个,待解决
  */
-
 
 
 import UIKit
@@ -26,6 +23,12 @@ public let listenHost:String = "https://www.baidu.com"
 public let successCode:String = ""
 //MARK: 请求域名
 private let baseURL:String = ""
+//MARK: 单张上传图片fileName
+private let fileName:String = String.init(describing: NSDate()) + ".png"
+//MARK: 多张图片上传fileName
+private let fileArrayName:String = String.init(describing: NSDate()) + ".png"
+
+private let imgScal:CGFloat = 1
 
 private let shareManager = AlamofireExtension()
 
@@ -69,45 +72,57 @@ class AlamofireExtension: NSObject {
     }
     
     //MARK: 对外网络请求
-    func request(url:String, methodType: RequestType, parameters:[String: Any]? = nil, header: Bool , isUploadPic:Bool? = nil, imgJSON:[String: UIImage]? = nil, result:@escaping((JSON, Bool)->())) {
+    func request(url:String, methodType: RequestType, parameters:[String: Any]? = nil, header: Bool , isUploadPic:Bool? = nil, imgJSON:[UIImage]? = nil, result:@escaping((JSON, Bool)->())) {
+        
         
         AlamofireExtension.share.startListen_Networking {[weak self] (netType) in
             switch netType {
             case .WIFI:
                 LJQPrint("wifi连接")
                 
-                if ((try? isUploadPic) != nil) {
-                    LJQPrint("上传图片")
-                    
-                }else {
-                    let parame = try? self!.configParameters(parame: parameters)
-                    
-                    shareManager.requestURL(url: url, methodType: methodType, parameters: parame, header: header, result: { (resposne, isSuccess) in
-                        LJQPrint(resposne)
-                        LJQPrint(isSuccess)
-                    })
+                self!.privateRequst(url: url, methodType: methodType, parameters: parameters, header: header, isUploadPic: isUploadPic, imgJSON: imgJSON) { (response, isSuccess) in
+                    result(response, isSuccess)
                 }
+                
             case .WWAN:
-                if isUploadPic! {
-                    LJQPrint("上传图片,")
+                LJQPrint("应该询问4G网络连接是否继续上传")
+                self!.privateRequst(url: url, methodType: methodType, parameters: parameters, header: header, isUploadPic: isUploadPic, imgJSON: imgJSON) { (response, isSuccess) in
+                    result(response, isSuccess)
                 }
-                LJQPrint("4G网络连接")
+                
             default:
+                
                 LJQPrint("无网络连接,显示无数据View")
             }
         }
     }
     
     
+    //MARK: 网络请求分类
+    private func privateRequst(url:String, methodType: RequestType, parameters:[String: Any]? = nil, header: Bool , isUploadPic:Bool? = nil, imgJSON:[UIImage]? = nil, result:@escaping((JSON, Bool)->())) {
+        if getIsUploadPic(isUploadPic: isUploadPic) {
+            LJQPrint("上传图片")
+            shareManager.uploadPic(url: url, picArr: imgJSON!, headers: header, parameters: parameters) { (response, isSuccess) in
+                result(response, isSuccess)
+            }
+        }else {
+            LJQPrint("网络请求")
+            shareManager.requestURL(url: url, methodType: methodType, parameters: parameters, header: header, result: { (response, isSuccess) in
+                result(response, isSuccess)
+            })
+        }
+    }
+    
+    
+    
+    
     
     //MARK: 内部网络请求
     private func requestURL(url: String, methodType:RequestType, parameters:[String:Any]? = nil ,header:Bool? = nil, result:@escaping((JSON, Bool))->()) {
         
-        
         var httpHeader:HTTPHeaders?
-        if header! {
+        if getIsHeader(isHeader: header) {
             httpHeader = configHeader(headers: ["key":"value"])
-            
         }
         
         let requestURL = getRequestURL(url: url)
@@ -135,71 +150,54 @@ class AlamofireExtension: NSObject {
         }
     }
     
-    //MARK: 图片上传(单张)
-    private func uploadPic(url: String, pic:UIImage, parameters: [String: Any]? = nil) {
+    //MARK: 图片上传
+    private func uploadPic(url: String, picArr:[UIImage], headers:Bool, parameters: [String: Any]? = nil, result:@escaping(JSON, Bool)->()) {
+        
+        var httpHeader:HTTPHeaders!
+        if getIsHeader(isHeader: headers) {
+            httpHeader = configHeader(headers: ["key":"value"])
+        }
         
         
-        
+        shareSessionManager.upload(multipartFormData: {[weak self] (multipartFormData) in
             
-        
-        
-        
-//        shareSessionManager.upload(multipartFormData: { (multipartFormData) in
-//            let fileName = String.init(describing: NSData()) + ".png"
-//            let imgData = pic.jpegData(compressionQuality: 1)
-//            multipartFormData.append(imgData!, withName: fileName, mimeType: "image/png")
-//
-//            for (key, value) in parameters! {
-//                multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
-//            }
-//            
-//        }, to: getRequestURL(url: url)) { (result) in
-//            switch result {
-//            case .success(request: UploadRequest, streamingFromDisk: <#T##Bool#>, streamFileURL: <#T##URL?#>)
-//            }
-//            LJQPrint(result)
-//        }
+            if picArr.count == 1 {
+                let img = picArr.first
+                let imgData = img!.jpegData(compressionQuality: imgScal)
+                multipartFormData.append(imgData!, withName: fileName, mimeType: "image/png")
+            }else if picArr.count >= 1 {
+                for image:UIImage in picArr {
+                    let imgData = image.jpegData(compressionQuality: imgScal)
+                    multipartFormData.append(imgData!, withName: fileName, fileName: fileName, mimeType: "image/png")
+                }
+            }
+            
+            if ((try? self!.configParameters(parame: parameters)) != nil) {
+                for (key, value) in parameters! {
+                    multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
+                }
+            }
+            
+        }, to: getRequestURL(url: url),
+           headers:httpHeader) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.responseJSON { response in
+                    if response.result.isSuccess {
+                        let resp = JSON(response.result.value as Any)
+                        LJQPrint(resp)
+                        
+                    }else {
+                        
+                    }
+                }
+            case .failure(let encodingError):
+                LJQPrint(encodingError)
+            }
+
+        }
     }
-    
-    
-    
-    //MARK: 上传图片
-//    private func uploadPics(url: String, picArray: [UIImage]) {
-//
-//        shareSessionManager.upload(multipartFormData: { (multipartFormData) in
-//
-//            let fileName = String.init(describing: NSData()) + ".png"
-//            for img in picArray {
-//                let imgData = img.jpegData(compressionQuality: 1)
-//                multipartFormData.append(imgData!, withName: "file", fileName: fileName, mimeType: "image/png")
-//            }
-//
-//            for (key, value) in self.configParameters(parame: [:])! {
-//                multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
-//            }
-//
-//
-//
-//        }, to: getRequestURL(url: url, headers: true))) { (result) in
-//            switch result {
-//            case .success(let upload, _ , _):
-//                upload.responseJSON(completionHandler: { (response) in
-//                    if response.result.isSuccess {
-//                        let resp = JSON(response.result.value)
-//
-//                    }else {
-//
-//                    }
-//                })
-//
-//
-//
-//            case .failure(let encodingError):
-//                LJQPrint("上传失败")
-//
-//            }
-//        }
-//    }
     
     //MARK: 获取请求地址
     private func getRequestURL(url:String) -> String {
@@ -220,7 +218,7 @@ class AlamofireExtension: NSObject {
     
     //MARK: 设置请求头
     private func configHeader(headers:[String: String]) -> HTTPHeaders {
-        var httpHeader:HTTPHeaders?
+        var httpHeader:HTTPHeaders!
         httpHeader = headers
         return httpHeader!
     }
@@ -251,6 +249,27 @@ class AlamofireExtension: NSObject {
             method = HTTPMethod.patch
         }
         return method
+    }
+    
+    
+    //MARK: 判断是否上传图片
+    private func getIsUploadPic(isUploadPic: Bool?) -> Bool {
+        
+        if isUploadPic == nil {
+            return false
+        }
+        
+        return isUploadPic!
+    }
+    
+    //MARK: 判断是否设置是header
+    private func getIsHeader(isHeader: Bool?) -> Bool {
+        
+        if isHeader == nil {
+            return false
+        }
+        
+        return isHeader!
     }
     
     

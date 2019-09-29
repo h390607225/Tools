@@ -22,8 +22,7 @@ class ViewController: UIViewController {
 //        }
         
        
-        var str = try? testFunc(str: nil)
-        print(str)
+        
         
         
         AlamofireExtension.share.request(url: "123", methodType: .POST, parameters: nil, header: true, isUploadPic: false, imgJSON: nil) { (result, isSuccess) in
