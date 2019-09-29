@@ -83,40 +83,7 @@ func LJQPrint<T> (_ message: T, fileName: String = #file, lineNum: Int = #line) 
 }
 
 
-//MARK: UILabel扩展
-extension UILabel {
-    
-    //MARK: 设置文本字体
-    func setText(text: String , font: UIFont , color: UIColor) {
-        self.text = text
-        self.font = font
-        self.textColor = color
-    }
-    
-    //MARK: 根据文字计算高度
-    func stringLabelHeight() -> CGFloat {
-        let size = self.text!.boundingRect(with: CGSize(width: self.frame.width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font!], context: nil).size
-        return size.height
-    }
-    
-    //MARK: 根据文字计算宽度
-    func stringLabelWidth() -> CGFloat {
-        let size = self.text!.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: self.frame.height), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font!], context: nil).size
-        return size.width
-    }
-    
-    //MARK: 文字左右对齐
-    func changeLabelLeftAndRight() {
-        let textSize = (self.text! as NSString).boundingRect(with: CGSize(width: self.frame.width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine, .usesFontLeading], attributes: [NSAttributedString.Key.font: font!], context: nil)
-        let margin = (self.frame.width - textSize.width) / CGFloat(self.text!.count - 1)
-        let attributeString = NSMutableAttributedString.init(string: self.text!)
-        attributeString.addAttributes([(kCTKernAttributeName as NSAttributedString.Key) : margin], range: NSRange(location: 0, length: self.text!.count - 1))
-        self.attributedText = attributeString
-    }
-    
-    
-    
-}
+
 
 
 //MARK: String扩展
@@ -181,8 +148,8 @@ extension NSString  {
     
     
     
-    func hexStringFromString(string:String)->String{
-        let  myD = string.data(using: .utf8)
+    func hexStringFromString(string:String) -> String{
+        let myD = string.data(using: .utf8)
         let bytes = [UInt8](myD!)
         
         var hexString = ""
@@ -209,97 +176,7 @@ extension NSString  {
 
 
 
-//MARK: 颜色扩展
-extension UIColor {
-    
-    /// 颜色转化
-    ///
-    /// - Parameters:
-    ///   - color: 颜色16进制
-    ///   - alpha: 透明图
-    /// - Returns: 颜色
-    class func hexColorWithAlpha(color:String, alpha:CGFloat) -> UIColor {
-        
-        var colorString = color.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-        
-        if colorString.count < 6 {
-            return UIColor.clear
-        }
-        
-        if colorString.hasPrefix("0x") {
-            colorString = (colorString as NSString).substring(from: 2)
-        }
-        if colorString.hasPrefix("#") {
-            colorString = (colorString as NSString).substring(from: 1)
-        }
-        
-        if colorString.count != 6 {
-            return UIColor.clear
-        }
-        
-        var range = NSRange()
-        range.location = 0
-        range.length = 2
-        
-        let rString = (colorString as NSString).substring(with: range)
-        range.location = 2
-        let gString = (colorString as NSString).substring(with: range)
-        range.location = 4
-        let bString = (colorString as NSString).substring(with: range)
-        
-        var r:UInt32 = 0, g:UInt32 = 0, b:UInt32 = 0
-        
-        
-        Scanner(string: rString).scanHexInt32(&r)
-        Scanner(string: gString).scanHexInt32(&g)
-        Scanner(string: bString).scanHexInt32(&b)
-        
-        return UIColor.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
-        
-    }
-    
-    /// 颜色转化
-    ///
-    /// - Parameter color: 颜色16进制
-    /// - Returns: 颜色
-    class func hexColor(color:String) -> UIColor {
-        var colorString = color.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-        
-        if colorString.count < 6 {
-            return UIColor.clear
-        }
-        
-        if colorString.hasPrefix("0x") {
-            colorString = (colorString as NSString).substring(from: 2)
-        }
-        if colorString.hasPrefix("#") {
-            colorString = (colorString as NSString).substring(from: 1)
-        }
-        
-        if colorString.count != 6 {
-            return UIColor.clear
-        }
-        
-        var range = NSRange()
-        range.location = 0
-        range.length = 2
-        
-        let rString = (colorString as NSString).substring(with: range)
-        range.location = 2
-        let gString = (colorString as NSString).substring(with: range)
-        range.location = 4
-        let bString = (colorString as NSString).substring(with: range)
-        
-        var r:UInt32 = 0, g:UInt32 = 0, b:UInt32 = 0
-        
-        
-        Scanner(string: rString).scanHexInt32(&r)
-        Scanner(string: gString).scanHexInt32(&g)
-        Scanner(string: bString).scanHexInt32(&b)
-        
-        return UIColor.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-    }
-}
+
 
 
 //MARK: View扩展
@@ -466,68 +343,9 @@ extension UIImage {
 
 
 
-enum DateFormatterENUM {
-    case YMD //时间格式 yyyy-MM-dd
-    case HMS //时间格式 HH:mm:ss
-    case YMDHMS //时间格式 yyyy-MM-dd HH:mm:ss
-}
 
-//MARK: Date扩展
-extension NSDate {
-    
-    
-    /// 获取当前时间
-    ///
-    /// - Parameter formatterType: 时间格式
-    /// - Returns: 时间字符串
-    class func getCurrentTime(formatterType:DateFormatterENUM) -> String {
-        let formater = DateFormatter()
-        switch formatterType {
-        case .YMD:
-            formater.dateFormat = "yyyy-MM-dd"
-        case .HMS:
-            formater.dateFormat = "HH:mm:ss"
-        default:
-            formater.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        }
-        
-        let nowDate = NSDate()
-        return formater.string(from: nowDate as Date)
-    }
-    
-    /// 字符串转Date
-    ///
-    /// - Parameters:
-    ///   - dateStr: 字符串时间
-    ///   - dateFormatter: 时间格式
-    /// - Returns: 时间Date
-    class func stringToDate(dateStr:String, dateFormatter:String) -> NSDate {
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormatter
-        return formatter.date(from: dateStr)! as NSDate
-    }
-    
-    /// Date转字符串
-    ///
-    /// - Parameters:
-    ///   - date: 时间戳
-    ///   - dateFormatter: 时间格式
-    /// - Returns: 时间字符串
-    class func DateToString(date:NSDate, dateFormatter:String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormatter
-        return formatter.string(for: date as NSDate)!
-    }
-    
-    /// 获取当前时间时间戳 (秒)
-    ///
-    /// - Returns: 返回字符串
-    class func timeStamp() -> String {
-        let timeInterval:TimeInterval = self.init().timeIntervalSince1970
-        let timeStamp = Int(timeInterval * 1000)
-        return "\(timeStamp)"
-    }
-}
+
+
 
 
 extension UINavigationController {

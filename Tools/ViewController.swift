@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
-    var testTitleList:[[String]] = [["Notification","UserDefault"],["AlamofireExtension","SocketExtension"],["CoreData","plist","FMDB"],["Bluetooth"]]
+    var testTitleList:[[String]] = [["NotificationExtension","UserDefaultExtension"],
+                                    ["AlamofireExtension","SocketExtension"],
+                                    ["CoreDataExtension","plist","FMDBExtension"],
+                                    ["BluetoothExtension"]]
     
     var sectionTitle:[String] = ["系统工具","网络连接","文件管理","硬件调用"]
     
@@ -42,6 +45,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             cell = UITableViewCell.init(style: .default, reuseIdentifier: indexCell)
         }
         cell?.textLabel?.text = testTitleList[indexPath.section][indexPath.row]
+        cell?.selectionStyle = .none
         return cell!
     }
     
@@ -58,7 +62,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     
     lazy var tableView:UITableView = {[weak self] in
-        let tableview = UITableView.init(frame: self!.view.frame, style: UITableView.Style.grouped)
+        let tableview = UITableView.init(frame: self!.view.frame, style: .grouped)
         tableview.delegate = self
         tableview.dataSource = self
         return tableview

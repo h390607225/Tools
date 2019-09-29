@@ -25,6 +25,9 @@
 		6ACBC1C523410142000E6682 /* SocketExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1C423410142000E6682 /* SocketExtension.swift */; };
 		6ACBC1D723411270000E6682 /* SuccessStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1D623411270000E6682 /* SuccessStatus.swift */; };
 		6ACBC1D92341127C000E6682 /* ErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1D82341127C000E6682 /* ErrorStatus.swift */; };
+		6ACBC1DB234113ED000E6682 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1DA234113ED000E6682 /* UIColorExtension.swift */; };
+		6ACBC1DD23411426000E6682 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1DC23411426000E6682 /* UILabelExtension.swift */; };
+		6ACBC1DF2341154F000E6682 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1DE2341154F000E6682 /* NSDateExtension.swift */; };
 		77F17CA8DCBF6D4E2979E2CB /* Pods_Tools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534D4E3A2A1F0E37276DF48B /* Pods_Tools.framework */; };
 		ADF51D9BFB91500064002EF0 /* Pods_ToolsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009BCD2621A7BAEE6C42BFD6 /* Pods_ToolsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +77,9 @@
 		6ACBC1C423410142000E6682 /* SocketExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketExtension.swift; sourceTree = "<group>"; };
 		6ACBC1D623411270000E6682 /* SuccessStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStatus.swift; sourceTree = "<group>"; };
 		6ACBC1D82341127C000E6682 /* ErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStatus.swift; sourceTree = "<group>"; };
+		6ACBC1DA234113ED000E6682 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		6ACBC1DC23411426000E6682 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		6ACBC1DE2341154F000E6682 /* NSDateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		6BAF2C02571CBDE71B5770EE /* Pods-Tools.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tools.release.xcconfig"; path = "Target Support Files/Pods-Tools/Pods-Tools.release.xcconfig"; sourceTree = "<group>"; };
 		6EB4E359CE5AD0CDDA773CFB /* Pods-ToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToolsTests.release.xcconfig"; path = "Target Support Files/Pods-ToolsTests/Pods-ToolsTests.release.xcconfig"; sourceTree = "<group>"; };
 		92538F1D71194BCE1732BE96 /* Pods-ToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToolsTests.debug.xcconfig"; path = "Target Support Files/Pods-ToolsTests/Pods-ToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -193,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				6AB782D22316156000EA27DD /* CustomButtonView.swift */,
+				6ACBC1DA234113ED000E6682 /* UIColorExtension.swift */,
+				6ACBC1DC23411426000E6682 /* UILabelExtension.swift */,
 			);
 			path = ViewFile;
 			sourceTree = "<group>";
@@ -202,6 +210,7 @@
 			children = (
 				6AB782D623161FDB00EA27DD /* SystemExtension.swift */,
 				6AB782D82316ABA800EA27DD /* NotificationExtension.swift */,
+				6ACBC1DE2341154F000E6682 /* NSDateExtension.swift */,
 			);
 			path = SystemTools;
 			sourceTree = "<group>";
@@ -548,8 +557,11 @@
 				6AB782D723161FDB00EA27DD /* SystemExtension.swift in Sources */,
 				6AB782A4231614EF00EA27DD /* ViewController.swift in Sources */,
 				6AB782AA231614EF00EA27DD /* Tools.xcdatamodeld in Sources */,
+				6ACBC1DD23411426000E6682 /* UILabelExtension.swift in Sources */,
 				6A455C292317B76A00EEFB92 /* CoreBluetoothExtension.swift in Sources */,
+				6ACBC1DF2341154F000E6682 /* NSDateExtension.swift in Sources */,
 				6AB782A2231614EF00EA27DD /* AppDelegate.swift in Sources */,
+				6ACBC1DB234113ED000E6682 /* UIColorExtension.swift in Sources */,
 				6ACBC1D92341127C000E6682 /* ErrorStatus.swift in Sources */,
 				6ACBC1C32340F8C2000E6682 /* NSUserDefaultExtension.swift in Sources */,
 				6AB782D92316ABA800EA27DD /* NotificationExtension.swift in Sources */,
