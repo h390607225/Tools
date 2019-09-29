@@ -17,17 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-//        self.window = UIWindow.init(frame: UIScreen.main.bounds)
-//        let homePage = HomePage.init()
-//        let navi = UINavigationController.init(rootViewController: homePage)
-//        self.window?.rootViewController = navi
-        
-        AlamofireExtension.share.setAlamofireHttps()
-        
-        
-        
-        
         return true
     }
 

@@ -8,7 +8,6 @@ target 'Tools' do
 
 pod 'Alamofire', '~> 4.8.2'
 pod 'SwiftyJSON', '~> 5.0.0'
-pod 'SwiftSocket', '~> 2.0.2'
   # Pods for Tools
 
   target 'ToolsTests' do

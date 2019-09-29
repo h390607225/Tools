@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		2FAF301D4E4FD39C03B314D6 /* Pods_ToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D5DB6CEA869883FE8BCE368 /* Pods_ToolsTests.framework */; };
 		6A455C292317B76A00EEFB92 /* CoreBluetoothExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */; };
-		6A5D2F1023212D7A00F08258 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */; };
 		6A5EA9E32318CF91008200E2 /* AlamofireExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */; };
-		6A8BD279233EF3FA0045ED7C /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8BD278233EF3FA0045ED7C /* CustomToast.swift */; };
-		6A9BA92C232269CF0022CA38 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9BA92B232269CF0022CA38 /* HomePage.swift */; };
 		6AB782A2231614EF00EA27DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782A1231614EF00EA27DD /* AppDelegate.swift */; };
 		6AB782A4231614EF00EA27DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782A3231614EF00EA27DD /* ViewController.swift */; };
 		6AB782A7231614EF00EA27DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB782A5231614EF00EA27DD /* Main.storyboard */; };
@@ -22,11 +19,12 @@
 		6AB782BA231614F000EA27DD /* ToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782B9231614F000EA27DD /* ToolsTests.swift */; };
 		6AB782C5231614F000EA27DD /* ToolsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782C4231614F000EA27DD /* ToolsUITests.swift */; };
 		6AB782D32316156000EA27DD /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782D22316156000EA27DD /* CustomButtonView.swift */; };
-		6AB782D523161DEE00EA27DD /* CustomLableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782D423161DEE00EA27DD /* CustomLableView.swift */; };
 		6AB782D723161FDB00EA27DD /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782D623161FDB00EA27DD /* SystemExtension.swift */; };
 		6AB782D92316ABA800EA27DD /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB782D82316ABA800EA27DD /* NotificationExtension.swift */; };
 		6ACBC1C32340F8C2000E6682 /* NSUserDefaultExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1C22340F8C2000E6682 /* NSUserDefaultExtension.swift */; };
 		6ACBC1C523410142000E6682 /* SocketExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1C423410142000E6682 /* SocketExtension.swift */; };
+		6ACBC1D723411270000E6682 /* SuccessStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1D623411270000E6682 /* SuccessStatus.swift */; };
+		6ACBC1D92341127C000E6682 /* ErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBC1D82341127C000E6682 /* ErrorStatus.swift */; };
 		77F17CA8DCBF6D4E2979E2CB /* Pods_Tools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534D4E3A2A1F0E37276DF48B /* Pods_Tools.framework */; };
 		ADF51D9BFB91500064002EF0 /* Pods_ToolsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009BCD2621A7BAEE6C42BFD6 /* Pods_ToolsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -54,10 +52,7 @@
 		534D4E3A2A1F0E37276DF48B /* Pods_Tools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE1DAC872B7BFDA8CD7E0F3 /* Pods-Tools.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tools.debug.xcconfig"; path = "Target Support Files/Pods-Tools/Pods-Tools.debug.xcconfig"; sourceTree = "<group>"; };
 		6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothExtension.swift; sourceTree = "<group>"; };
-		6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireExtension.swift; sourceTree = "<group>"; };
-		6A8BD278233EF3FA0045ED7C /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
-		6A9BA92B232269CF0022CA38 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		6AB7829E231614EF00EA27DD /* Tools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB782A1231614EF00EA27DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AB782A3231614EF00EA27DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,11 +68,12 @@
 		6AB782C4231614F000EA27DD /* ToolsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsUITests.swift; sourceTree = "<group>"; };
 		6AB782C6231614F000EA27DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AB782D22316156000EA27DD /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonView.swift; sourceTree = "<group>"; };
-		6AB782D423161DEE00EA27DD /* CustomLableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLableView.swift; sourceTree = "<group>"; };
 		6AB782D623161FDB00EA27DD /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		6AB782D82316ABA800EA27DD /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		6ACBC1C22340F8C2000E6682 /* NSUserDefaultExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserDefaultExtension.swift; sourceTree = "<group>"; };
 		6ACBC1C423410142000E6682 /* SocketExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketExtension.swift; sourceTree = "<group>"; };
+		6ACBC1D623411270000E6682 /* SuccessStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStatus.swift; sourceTree = "<group>"; };
+		6ACBC1D82341127C000E6682 /* ErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStatus.swift; sourceTree = "<group>"; };
 		6BAF2C02571CBDE71B5770EE /* Pods-Tools.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tools.release.xcconfig"; path = "Target Support Files/Pods-Tools/Pods-Tools.release.xcconfig"; sourceTree = "<group>"; };
 		6EB4E359CE5AD0CDDA773CFB /* Pods-ToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToolsTests.release.xcconfig"; path = "Target Support Files/Pods-ToolsTests/Pods-ToolsTests.release.xcconfig"; sourceTree = "<group>"; };
 		92538F1D71194BCE1732BE96 /* Pods-ToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToolsTests.debug.xcconfig"; path = "Target Support Files/Pods-ToolsTests/Pods-ToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,19 +147,12 @@
 		6AB782A0231614EF00EA27DD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6ACBC1C923410FF8000E6682 /* Features */,
+				6ACBC1CA23411013000E6682 /* View */,
+				6ACBC1D3234111E9000E6682 /* Status */,
+				6ACBC1CB23411035000E6682 /* Test */,
 				6AB782A1231614EF00EA27DD /* AppDelegate.swift */,
 				6AB782A3231614EF00EA27DD /* ViewController.swift */,
-				6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */,
-				6ACBC1C423410142000E6682 /* SocketExtension.swift */,
-				6AB782D22316156000EA27DD /* CustomButtonView.swift */,
-				6AB782D423161DEE00EA27DD /* CustomLableView.swift */,
-				6AB782D623161FDB00EA27DD /* SystemExtension.swift */,
-				6AB782D82316ABA800EA27DD /* NotificationExtension.swift */,
-				6ACBC1C22340F8C2000E6682 /* NSUserDefaultExtension.swift */,
-				6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */,
-				6A8BD278233EF3FA0045ED7C /* CustomToast.swift */,
-				6A5D2F0F23212D7A00F08258 /* BaseViewController.swift */,
-				6A9BA92B232269CF0022CA38 /* HomePage.swift */,
 				6AB782A5231614EF00EA27DD /* Main.storyboard */,
 				6AB782AB231614F000EA27DD /* Assets.xcassets */,
 				6AB782AD231614F000EA27DD /* LaunchScreen.storyboard */,
@@ -189,6 +178,139 @@
 				6AB782C6231614F000EA27DD /* Info.plist */,
 			);
 			path = ToolsUITests;
+			sourceTree = "<group>";
+		};
+		6ACBC1C623410A85000E6682 /* NetWorkFile */ = {
+			isa = PBXGroup;
+			children = (
+				6A5EA9E22318CF91008200E2 /* AlamofireExtension.swift */,
+				6ACBC1C423410142000E6682 /* SocketExtension.swift */,
+			);
+			path = NetWorkFile;
+			sourceTree = "<group>";
+		};
+		6ACBC1C723410AA4000E6682 /* ViewFile */ = {
+			isa = PBXGroup;
+			children = (
+				6AB782D22316156000EA27DD /* CustomButtonView.swift */,
+			);
+			path = ViewFile;
+			sourceTree = "<group>";
+		};
+		6ACBC1C823410AE6000E6682 /* SystemTools */ = {
+			isa = PBXGroup;
+			children = (
+				6AB782D623161FDB00EA27DD /* SystemExtension.swift */,
+				6AB782D82316ABA800EA27DD /* NotificationExtension.swift */,
+			);
+			path = SystemTools;
+			sourceTree = "<group>";
+		};
+		6ACBC1C923410FF8000E6682 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1CD23411099000E6682 /* DocumentManager */,
+				6ACBC1CC2341106B000E6682 /* Hardware */,
+				6ACBC1C823410AE6000E6682 /* SystemTools */,
+				6ACBC1C623410A85000E6682 /* NetWorkFile */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6ACBC1CA23411013000E6682 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1C723410AA4000E6682 /* ViewFile */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6ACBC1CB23411035000E6682 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1D223411133000E6682 /* ViewTest */,
+				6ACBC1D123411120000E6682 /* NetworkTest */,
+				6ACBC1D02341110B000E6682 /* SystemTest */,
+				6ACBC1CF234110F4000E6682 /* DoucmentTest */,
+				6ACBC1CE234110E3000E6682 /* HardwareTest */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		6ACBC1CC2341106B000E6682 /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				6A455C282317B76A00EEFB92 /* CoreBluetoothExtension.swift */,
+			);
+			path = Hardware;
+			sourceTree = "<group>";
+		};
+		6ACBC1CD23411099000E6682 /* DocumentManager */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1C22340F8C2000E6682 /* NSUserDefaultExtension.swift */,
+			);
+			path = DocumentManager;
+			sourceTree = "<group>";
+		};
+		6ACBC1CE234110E3000E6682 /* HardwareTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HardwareTest;
+			sourceTree = "<group>";
+		};
+		6ACBC1CF234110F4000E6682 /* DoucmentTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DoucmentTest;
+			sourceTree = "<group>";
+		};
+		6ACBC1D02341110B000E6682 /* SystemTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SystemTest;
+			sourceTree = "<group>";
+		};
+		6ACBC1D123411120000E6682 /* NetworkTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkTest;
+			sourceTree = "<group>";
+		};
+		6ACBC1D223411133000E6682 /* ViewTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewTest;
+			sourceTree = "<group>";
+		};
+		6ACBC1D3234111E9000E6682 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1D52341120C000E6682 /* ErrorStatus */,
+				6ACBC1D4234111FA000E6682 /* SuccessStatus */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		6ACBC1D4234111FA000E6682 /* SuccessStatus */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1D623411270000E6682 /* SuccessStatus.swift */,
+			);
+			path = SuccessStatus;
+			sourceTree = "<group>";
+		};
+		6ACBC1D52341120C000E6682 /* ErrorStatus */ = {
+			isa = PBXGroup;
+			children = (
+				6ACBC1D82341127C000E6682 /* ErrorStatus.swift */,
+			);
+			path = ErrorStatus;
 			sourceTree = "<group>";
 		};
 		E82D29326FAB03617D0C0517 /* Frameworks */ = {
@@ -422,15 +544,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ACBC1D723411270000E6682 /* SuccessStatus.swift in Sources */,
 				6AB782D723161FDB00EA27DD /* SystemExtension.swift in Sources */,
-				6A9BA92C232269CF0022CA38 /* HomePage.swift in Sources */,
 				6AB782A4231614EF00EA27DD /* ViewController.swift in Sources */,
-				6A5D2F1023212D7A00F08258 /* BaseViewController.swift in Sources */,
 				6AB782AA231614EF00EA27DD /* Tools.xcdatamodeld in Sources */,
 				6A455C292317B76A00EEFB92 /* CoreBluetoothExtension.swift in Sources */,
-				6A8BD279233EF3FA0045ED7C /* CustomToast.swift in Sources */,
-				6AB782D523161DEE00EA27DD /* CustomLableView.swift in Sources */,
 				6AB782A2231614EF00EA27DD /* AppDelegate.swift in Sources */,
+				6ACBC1D92341127C000E6682 /* ErrorStatus.swift in Sources */,
 				6ACBC1C32340F8C2000E6682 /* NSUserDefaultExtension.swift in Sources */,
 				6AB782D92316ABA800EA27DD /* NotificationExtension.swift in Sources */,
 				6A5EA9E32318CF91008200E2 /* AlamofireExtension.swift in Sources */,

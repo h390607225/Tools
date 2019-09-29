@@ -110,10 +110,6 @@ class CustomButtonView: UIView {
         self.backgroundColor = .purple
         
         
-        
-        
-        
-        
     }
     
     override func layoutSubviews() {
