@@ -20,31 +20,33 @@ public let STATEHEIGHT = UIApplication.shared.statusBarFrame.height
 public let NAVHEITH = (UIApplication.shared.statusBarFrame.height + 44)
 //MARK: 获取根视图
 public let KEYWINDOW = UIApplication.shared.keyWindow
+//MARK: 字体类型
+public let FontType = "Apple Color Emoji"
 
 //MARK: 甚至文字大小及字体类型
 //MARK: 微软雅黑
-public let FONT_10 = UIFont(name: "Microsoft YaHei", size: 10)
-public let FONT_11 = UIFont(name: "Microsoft YaHei", size: 11)
-public let FONT_12 = UIFont(name: "Microsoft YaHei", size: 12)
-public let FONT_13 = UIFont(name: "Microsoft YaHei", size: 13)
-public let FONT_14 = UIFont(name: "Microsoft YaHei", size: 14)
-public let FONT_15 = UIFont(name: "Microsoft YaHei", size: 15)
-public let FONT_16 = UIFont(name: "Microsoft YaHei", size: 16)
-public let FONT_17 = UIFont(name: "Microsoft YaHei", size: 17)
-public let FONT_18 = UIFont(name: "Microsoft YaHei", size: 18)
-public let FONT_19 = UIFont(name: "Microsoft YaHei", size: 19)
-public let FONT_20 = UIFont(name: "Microsoft YaHei", size: 20)
-public let FONT_21 = UIFont(name: "Microsoft YaHei", size: 21)
-public let FONT_22 = UIFont(name: "Microsoft YaHei", size: 22)
-public let FONT_23 = UIFont(name: "Microsoft YaHei", size: 23)
-public let FONT_24 = UIFont(name: "Microsoft YaHei", size: 24)
-public let FONT_25 = UIFont(name: "Microsoft YaHei", size: 25)
-public let FONT_26 = UIFont(name: "Microsoft YaHei", size: 26)
-public let FONT_27 = UIFont(name: "Microsoft YaHei", size: 27)
-public let FONT_28 = UIFont(name: "Microsoft YaHei", size: 28)
-public let FONT_29 = UIFont(name: "Microsoft YaHei", size: 29)
-public let FONT_30 = UIFont(name: "Microsoft YaHei", size: 30)
-public let FONT_31 = UIFont(name: "Microsoft YaHei", size: 31)
+public let FONT_10 = UIFont(name: FontType, size: 10)
+public let FONT_11 = UIFont(name: FontType, size: 11)
+public let FONT_12 = UIFont(name: FontType, size: 12)
+public let FONT_13 = UIFont(name: FontType, size: 13)
+public let FONT_14 = UIFont(name: FontType, size: 14)
+public let FONT_15 = UIFont(name: FontType, size: 15)
+public let FONT_16 = UIFont(name: FontType, size: 16)
+public let FONT_17 = UIFont(name: FontType, size: 17)
+public let FONT_18 = UIFont(name: FontType, size: 18)
+public let FONT_19 = UIFont(name: FontType, size: 19)
+public let FONT_20 = UIFont(name: FontType, size: 20)
+public let FONT_21 = UIFont(name: FontType, size: 21)
+public let FONT_22 = UIFont(name: FontType, size: 22)
+public let FONT_23 = UIFont(name: FontType, size: 23)
+public let FONT_24 = UIFont(name: FontType, size: 24)
+public let FONT_25 = UIFont(name: FontType, size: 25)
+public let FONT_26 = UIFont(name: FontType, size: 26)
+public let FONT_27 = UIFont(name: FontType, size: 27)
+public let FONT_28 = UIFont(name: FontType, size: 28)
+public let FONT_29 = UIFont(name: FontType, size: 29)
+public let FONT_30 = UIFont(name: FontType, size: 30)
+public let FONT_31 = UIFont(name: FontType, size: 31)
 
 
 /// 判断是否为iPhoneX以上的设备
@@ -58,6 +60,13 @@ func is_iPhoneX() -> Bool {
     }
 }
 
+
+/// 国际化字符串
+/// - Parameter key: key
+/// - Parameter comment: 注释
+func localString(_ key:String, _ comment:String) -> String {
+    return NSLocalizedString(key, comment: comment)
+}
 
 
 
