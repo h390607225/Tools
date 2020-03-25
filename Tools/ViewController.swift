@@ -21,6 +21,8 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         LJQPrint(UIFont.familyNames)
         
         self.view.addSubview(tableView)
@@ -57,7 +59,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        ToastView.show(msg: "系统工具系统工具系统工具系统工具系统工具统工具系统工具", space: .bottom, inView: self.view)
     }
     
     
