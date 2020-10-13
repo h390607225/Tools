@@ -83,27 +83,27 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
         switch central.state {
         case .unknown:
             LJQPrint("unknown")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unknow])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unknow])
             break
         case .resetting:
             LJQPrint("resetting")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.resetting])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.resetting])
             break
         case .unsupported: //不支持蓝牙
             LJQPrint("unsupported")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unsupported])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unsupported])
             break
         case .unauthorized: //未获取权限
             LJQPrint("unauthorized")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unauthorized])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.unauthorized])
             break
         case .poweredOff: //蓝牙关
             LJQPrint("poweredOff")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.poweredOff])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.poweredOff])
             break
         case .poweredOn: //蓝牙开
             LJQPrint("powerOn")
-            NotificationExtension.postNotification(name: BLESTATUS, object: ["status":BLEStatus.poweredOn])
+            NotificationCenter.postNotification(name: BLESTATUS, object: ["status":BLEStatus.poweredOn])
             central.scanForPeripherals(withServices: nil, options: nil)
             break
             
@@ -117,12 +117,12 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
         peripheral.delegate = self
         peripheral.discoverServices(nil)
         nowPeripheral = peripheral
-        NotificationExtension.postNotification(name: BLECONNECTSTATUS , object: ["status": BLEConnectStatus.connected])
+        NotificationCenter.postNotification(name: BLECONNECTSTATUS , object: ["status": BLEConnectStatus.connected])
     }
     
     //MARK: 蓝牙连接错误
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        NotificationExtension.postNotification(name: BLECONNECTSTATUS, object: ["status":BLEConnectStatus.connectError])
+        NotificationCenter.postNotification(name: BLECONNECTSTATUS, object: ["status":BLEConnectStatus.connectError])
     }
     
     //MARK: 发现服务回调
@@ -145,7 +145,7 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
     
     //MARK: 蓝牙取消与外设连接回调
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        NotificationExtension.postNotification(name: BLECONNECTSTATUS , object: ["status":BLEConnectStatus.disConnect])
+        NotificationCenter.postNotification(name: BLECONNECTSTATUS , object: ["status":BLEConnectStatus.disConnect])
     }
     
     //MARK: 蓝牙与应用状态同步
@@ -194,7 +194,7 @@ class CoreBluetoothExtension: NSObject , CBCentralManagerDelegate , CBPeripheral
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic.uuid.uuidString == BLEREADID {
 
-            NotificationExtension.postNotification(name: BLESENDRESPONSE, object: ["msg":characteristic])
+            NotificationCenter.postNotification(name: BLESENDRESPONSE, object: ["msg":characteristic])
 
         }
         

@@ -19,8 +19,6 @@ import SwiftyJSON
 public let timeoutRequest:TimeInterval = 20
 //MARK: 监听的网络
 public let listenHost:String = "https://www.baidu.com"
-//MARK: 请求成功码
-public let successCode:String = ""
 //MARK: 请求域名
 private let baseURL:String = ""
 //MARK: 单张上传图片fileName
@@ -133,7 +131,7 @@ class AlamofireExtension: NSObject {
                 
                 let responseJson = JSON(value)
                 
-                if responseJson["code"].stringValue == successCode {
+                if responseJson["code"].stringValue == success {
                     result((responseJson,true))
                 }else {
                     result((responseJson,false))

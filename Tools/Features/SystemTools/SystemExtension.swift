@@ -14,43 +14,45 @@ public let WIDTH = UIScreen.main.bounds.width
 public let HEIGHT = UIScreen.main.bounds.height
 //MARK: 屏幕frame
 public let MAINFRAME = UIScreen.main.bounds
-//MARK: 状态栏高度
-public let STATEHEIGHT = UIApplication.shared.statusBarFrame.height
-//MARK: 状态栏+导航栏高度(为了适配iphone X)
-public let NAVHEITH = (UIApplication.shared.statusBarFrame.height + 44)
-//MARK: 获取根视图
-public let KEYWINDOW = UIApplication.shared.keyWindow
 
-//MARK: 甚至文字大小及字体类型
-//MARK: 微软雅黑
-public let FONT_10 = UIFont(name: "Microsoft YaHei", size: 10)
-public let FONT_11 = UIFont(name: "Microsoft YaHei", size: 11)
-public let FONT_12 = UIFont(name: "Microsoft YaHei", size: 12)
-public let FONT_13 = UIFont(name: "Microsoft YaHei", size: 13)
-public let FONT_14 = UIFont(name: "Microsoft YaHei", size: 14)
-public let FONT_15 = UIFont(name: "Microsoft YaHei", size: 15)
-public let FONT_16 = UIFont(name: "Microsoft YaHei", size: 16)
-public let FONT_17 = UIFont(name: "Microsoft YaHei", size: 17)
-public let FONT_18 = UIFont(name: "Microsoft YaHei", size: 18)
-public let FONT_19 = UIFont(name: "Microsoft YaHei", size: 19)
-public let FONT_20 = UIFont(name: "Microsoft YaHei", size: 20)
-public let FONT_21 = UIFont(name: "Microsoft YaHei", size: 21)
-public let FONT_22 = UIFont(name: "Microsoft YaHei", size: 22)
-public let FONT_23 = UIFont(name: "Microsoft YaHei", size: 23)
-public let FONT_24 = UIFont(name: "Microsoft YaHei", size: 24)
-public let FONT_25 = UIFont(name: "Microsoft YaHei", size: 25)
-public let FONT_26 = UIFont(name: "Microsoft YaHei", size: 26)
-public let FONT_27 = UIFont(name: "Microsoft YaHei", size: 27)
-public let FONT_28 = UIFont(name: "Microsoft YaHei", size: 28)
-public let FONT_29 = UIFont(name: "Microsoft YaHei", size: 29)
-public let FONT_30 = UIFont(name: "Microsoft YaHei", size: 30)
-public let FONT_31 = UIFont(name: "Microsoft YaHei", size: 31)
+
+//MARK: 获取根视图
+var KEYWINDOW:UIWindow {
+    var window:UIWindow? = nil
+    if #available(iOS 13.0, *) {
+        for windowScene:UIWindowScene in ((UIApplication.shared.connectedScenes as?  Set<UIWindowScene>)!) {
+            LJQPrint(windowScene.activationState)
+            if windowScene.activationState == .foregroundInactive || windowScene.activationState == .foregroundActive {
+                window = windowScene.windows.first(where: {$0.isKeyWindow})
+                break
+            }
+        }
+        return window!
+    }else{
+        return  UIApplication.shared.keyWindow!
+    }
+}
+
+
+//MARK: 状态栏高度
+var STATEHEIGHT:CGFloat {
+    if #available(iOS 13.0, *) {
+        return (KEYWINDOW.windowScene?.statusBarManager!.statusBarFrame.height)!
+    }else {
+        return UIApplication.shared.statusBarFrame.height
+    }
+}
+
+//MARK: 状态栏+导航栏高度(为了适配iphone X)
+var NAVHEITH:CGFloat {
+    return STATEHEIGHT + 44
+}
 
 
 /// 判断是否为iPhoneX以上的设备
 ///
 /// - Returns: bool值
-func is_iPhoneX() -> Bool {
+var is_iPhoneX:Bool {
     if STATEHEIGHT > 20 {
         return true
     }else {
@@ -59,13 +61,68 @@ func is_iPhoneX() -> Bool {
 }
 
 
+//MARK: tabbar高度
+var TABBARHEIGHT:CGFloat {
+    if is_iPhoneX {
+        return 83
+    }else {
+        return 49
+    }
+}
+
+
+
+
+
+
+
+
+//MARK: 字体类型
+public let FontType = "Apple Color Emoji"
+
+//MARK: 甚至文字大小及字体类型
+//MARK: 微软雅黑
+public let FONT_10 = UIFont(name: FontType, size: 10)
+public let FONT_11 = UIFont(name: FontType, size: 11)
+public let FONT_12 = UIFont(name: FontType, size: 12)
+public let FONT_13 = UIFont(name: FontType, size: 13)
+public let FONT_14 = UIFont(name: FontType, size: 14)
+public let FONT_15 = UIFont(name: FontType, size: 15)
+public let FONT_16 = UIFont(name: FontType, size: 16)
+public let FONT_17 = UIFont(name: FontType, size: 17)
+public let FONT_18 = UIFont(name: FontType, size: 18)
+public let FONT_19 = UIFont(name: FontType, size: 19)
+public let FONT_20 = UIFont(name: FontType, size: 20)
+public let FONT_21 = UIFont(name: FontType, size: 21)
+public let FONT_22 = UIFont(name: FontType, size: 22)
+public let FONT_23 = UIFont(name: FontType, size: 23)
+public let FONT_24 = UIFont(name: FontType, size: 24)
+public let FONT_25 = UIFont(name: FontType, size: 25)
+public let FONT_26 = UIFont(name: FontType, size: 26)
+public let FONT_27 = UIFont(name: FontType, size: 27)
+public let FONT_28 = UIFont(name: FontType, size: 28)
+public let FONT_29 = UIFont(name: FontType, size: 29)
+public let FONT_30 = UIFont(name: FontType, size: 30)
+public let FONT_31 = UIFont(name: FontType, size: 31)
+
+
+
+
+
+/// 国际化字符串
+/// - Parameter key: key
+/// - Parameter comment: 注释
+func localString(_ key:String, _ comment:String) -> String {
+    return NSLocalizedString(key, comment: comment)
+}
+
 
 
 /// 设置比例宽度
 ///
 /// - Parameter width: 宽度
 /// - Returns: 比例宽度
-func GETSCALEWIDTH(width: CGFloat) -> CGFloat {
+func GETSCALEWIDTH(_ width: CGFloat) -> CGFloat {
     let retWidht = width * (WIDTH / 375.0)
     return retWidht
 }
@@ -164,121 +221,6 @@ extension NSString  {
             
         }
         return hexString
-    }
-    
-    
-    
-    
-    
-    
-}
-
-
-
-
-
-
-
-//MARK: View扩展
-typealias viewAction = (UIGestureRecognizer)->()
-extension UIView {
-    
-    enum GestureENUM {
-        case tap //点击
-        case long //长按
-        case pan //拖拽
-        case roation //旋转
-        case swipe //轻扫
-        case pinch //捏合
-    }
-    
-    private struct AssociatedKeys {
-        static var actionKey = "gestureKey"
-    }
-    
-    @objc dynamic var action:viewAction? {
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
-        }
-        get {
-            if let action = objc_getAssociatedObject(self, &AssociatedKeys.actionKey) as? viewAction {
-                return action
-            }
-            return nil
-        }
-    }
-    
-    @objc func viewTapAction(gesture: UIGestureRecognizer) {
-        if action != nil {
-            action!(gesture)
-        }
-    }
-    
-    func addGesture( _ gesture : GestureENUM , response:@escaping viewAction) {
-        
-        self.isUserInteractionEnabled = true
-        switch gesture {
-        case .tap:
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            tapGesture.numberOfTouchesRequired = 1
-            tapGesture.numberOfTapsRequired = 1
-            self.addGestureRecognizer(tapGesture)
-            self.action = response
-        case .long:
-            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            self.addGestureRecognizer(longPress)
-            self.action = response
-        case .pan:
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            self.addGestureRecognizer(panGesture)
-            self.action = response
-        case .roation:
-            let roation = UIRotationGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            self.addGestureRecognizer(roation)
-            self.action = response
-        case .swipe:
-            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            self.addGestureRecognizer(swipe)
-            self.action = response
-        case .pinch:
-            let pinch = UIPinchGestureRecognizer(target: self, action: #selector(viewTapAction(gesture:)))
-            self.addGestureRecognizer(pinch)
-            self.action = response
-        default:
-            LJQPrint("暂无其他手势")
-            break
-        }
-    
-    }
-    
-    
-    //MARK: View转图片
-    func viewForImage() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
-        self.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return snapshotImage
-    }
-    
-    
-    /// 给View设置渐变色
-    ///
-    /// - Parameters:
-    ///   - colors: 颜色数组
-    ///   - locations: 渐变色比例位置
-    ///   - startPoint: 渐变起始位置
-    ///   - endPoint: 渐变结束位置
-    /// - Returns: return value description
-    func getGradientLayer(colors:[CGColor], locations:[NSNumber], startPoint:CGPoint, endPoint:CGPoint) -> CAGradientLayer {
-        let gradientLayer = CAGradientLayer.init()
-        gradientLayer.frame = self.bounds
-        gradientLayer.colors = colors//设置渐变颜色
-        gradientLayer.locations = locations //渐变发生位置
-        gradientLayer.startPoint = startPoint//颜色其实位置
-        gradientLayer.endPoint = endPoint//颜色终止位置
-        self.layer.addSublayer(gradientLayer)
-        return gradientLayer
     }
     
 }

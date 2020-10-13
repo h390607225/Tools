@@ -21,6 +21,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        LJQPrint(UIFont.familyNames)
+        
         self.view.addSubview(tableView)
         
         // Do any additional setup after loading the view.
@@ -44,6 +48,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: indexCell)
         }
+//        cell?.textLabel?.text = NSLocalizedString("key", comment: "")
         cell?.textLabel?.text = testTitleList[indexPath.section][indexPath.row]
         cell?.selectionStyle = .none
         return cell!
@@ -54,7 +59,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        ToastView.show(msg: "系统工具系统工具系统工具系统工具系统工具统工具系统工具", space: .bottom, inView: self.view)
     }
     
     

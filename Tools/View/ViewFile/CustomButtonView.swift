@@ -118,7 +118,7 @@ class CustomButtonView: UIView {
         switch space {
         case .right?:
             img.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            titleLable.frame = CGRect(x: img.frame.width + spaceWidth, y: 0, width: titleLable.stringLabelWidth(), height: titleLable.stringLabelHeight())
+            titleLable.frame = CGRect(x: img.frame.width + spaceWidth, y: 0, width: titleLable.stringLabelWidth, height: titleLable.stringLabelHeight)
             self.frame.size = imgOrLabelBig()
             print("右侧")
             break
@@ -146,7 +146,7 @@ class CustomButtonView: UIView {
     
     //MARK: 根据文字判定父视图大小
     func imgOrLabelBig() -> CGSize {
-        if titleLable.stringLabelHeight() > img.frame.height {
+        if titleLable.stringLabelHeight > img.frame.height {
             return CGSize(width: titleLable.frame.width + spaceWidth + img.frame.width, height: titleLable.frame.height)
         }else {
             return CGSize(width: titleLable.frame.width + spaceWidth + img.frame.width, height: img.frame.height)
